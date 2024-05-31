@@ -12,6 +12,14 @@ model = load_model('./model_VGG16_23mei.h5')
 # Ensure model is ready to make predictions
 model.make_predict_function()
 
+recommendations = {
+    'Dry': 'Use moisturizer',
+    'Oily': 'Use suncream',
+    'Normal': 'Follow the normal routine',
+    'Combination': '1. Follow normal routine\n2. Meet the doctor',
+    'Sensitive': '1. Follow normal routine\n2. Meet the doctor'
+}
+
 
 def preprocess_image(img_path):
     img = image.load_img(img_path, target_size=(300, 300))
