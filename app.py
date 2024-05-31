@@ -34,5 +34,37 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/predict', methods=['POST'])
+def predict():
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file part'})
+
+    file = request.files['file']
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'})
+
+    if file:
+        file_path = os.path.join('./', file.filename)
+        file.save(file_path)
+
+        img = preprocess_image(file_path)
+        predictions = model.predict(img)
+        print("Predictions:", predictions)  # Debugging line
+        class_index = np.argmax(predictions, axis=1)[0]
+        classes = ['Dry', 'Oily', 'Normal', 'Combination', 'Sensitive']
+        predicted_class = classes[class_index]
+
+        print("Predicted class:", predicted_class)  # Debugging line
+
+        os.remove(file_path)  # Remove the saved file after prediction
+
+        # Get recommendations
+        recommended_action = recommendations[predicted_class]
+
+        return render_template('index.html', prediction=predicted_class, recommendation=recommended_action)
+
+    return jsonify({'error': 'Something went wrong'})
+
+
 if __name__ == "__main__":
     app.run(debug=True)
