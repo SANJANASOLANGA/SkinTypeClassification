@@ -1,4 +1,3 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,12 +8,37 @@
 <body>
     <h1>Upload an Image to Identify Skin Type</h1>
     <form action="/predict" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept="image/*" required>
+        <input type="file" name="file" accept="image/*" required onchange="previewImage(event)">
         <input type="submit" value="Upload">
     </form>
+
+    {% if image_file %}
+        <h2>Uploaded Image:</h2>
+        <img src="{{ url_for('static', filename='uploads/' ~ image_file) }}" alt="Uploaded Image" width="300">
+    {% endif %}
+
     {% if prediction %}
         <h2>Prediction: {{ prediction }}</h2>
         <p>Recommendations: {{ recommendation }}</p>
     {% endif %}
+
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function(){
+                var output = document.getElementById('uploadedImage');
+                if (output) {
+                    output.src = reader.result;
+                } else {
+                    var img = document.createElement('img');
+                    img.id = 'uploadedImage';
+                    img.src = reader.result;
+                    img.width = 300;
+                    document.body.appendChild(img);
+                }
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 </body>
 </html>
