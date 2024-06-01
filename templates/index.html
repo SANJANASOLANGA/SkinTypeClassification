@@ -8,7 +8,7 @@
 <body>
     <h1>Upload an Image to Identify Skin Type</h1>
     <form action="/predict" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept="image/*" required onchange="previewImage(event)">
+        <input type="file" name="file" accept="image/*" required onchange="clearPreviousResults(); previewImage(event)">
         <br><br>
         <label for="age">Age:</label>
         <input type="number" name="age" id="age" required>
@@ -22,15 +22,17 @@
         <input type="submit" value="Upload">
     </form>
 
-    {% if image_file %}
-        <h2>Uploaded Image:</h2>
-        <img src="{{ url_for('static', filename=image_file) }}" alt="Uploaded Image" width="300">
-    {% endif %}
+    <div id="results">
+        {% if image_file %}
+            <h2>Uploaded Image:</h2>
+            <img src="{{ url_for('static', filename=image_file) }}" alt="Uploaded Image" width="300" id="uploadedImage">
+        {% endif %}
 
-    {% if prediction %}
-        <h2>Prediction: {{ prediction }}</h2>
-        <p>Recommendations: {{ recommendation }}</p>
-    {% endif %}
+        {% if prediction %}
+            <h2>Prediction: {{ prediction }}</h2>
+            <p>Recommendations: {{ recommendation }}</p>
+        {% endif %}
+    </div>
 
     <script>
         function previewImage(event) {
@@ -44,10 +46,15 @@
                     img.id = 'uploadedImage';
                     img.src = reader.result;
                     img.width = 300;
-                    document.body.appendChild(img);
+                    document.getElementById('results').appendChild(img);
                 }
             }
             reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function clearPreviousResults() {
+            var resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
         }
     </script>
 </body>
