@@ -9,12 +9,22 @@
     <h1>Upload an Image to Identify Skin Type</h1>
     <form action="/predict" method="post" enctype="multipart/form-data">
         <input type="file" name="file" accept="image/*" required onchange="previewImage(event)">
+        <br><br>
+        <label for="age">Age:</label>
+        <input type="number" name="age" id="age" required>
+        <br><br>
+        <label for="allergies">Do you have any allergies? </label>
+        <select name="allergies" id="allergies" required>
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+        </select>
+        <br><br>
         <input type="submit" value="Upload">
     </form>
 
     {% if image_file %}
         <h2>Uploaded Image:</h2>
-        <img src="{{ url_for('static', filename='uploads/' ~ image_file) }}" alt="Uploaded Image" width="300">
+        <img src="{{ url_for('static', filename=image_file) }}" alt="Uploaded Image" width="300">
     {% endif %}
 
     {% if prediction %}
