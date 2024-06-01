@@ -23,10 +23,6 @@
     </form>
 
     <div id="results">
-        {% if image_file %}
-            <h2>Uploaded Image:</h2>
-            <img src="{{ url_for('static', filename=image_file) }}" alt="Uploaded Image" width="300" id="uploadedImage">
-        {% endif %}
 
         {% if prediction %}
             <h2>Prediction: {{ prediction }}</h2>
