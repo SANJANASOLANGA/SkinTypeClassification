@@ -13,13 +13,37 @@ model = load_model('./model_VGG16_23mei.h5')
 model.make_predict_function()
 
 recommendations = {
-    'Dry': 'Use moisturizer',
-    'Oily': 'Use suncream',
-    'Normal': 'Follow the normal routine',
-    'Combination': '1. Follow normal routine\n2. Meet the doctor',
-    'Sensitive': '1. Follow normal routine\n2. Meet the doctor'
+    'Dry': {
+        'TeensTwentiesNoAllergies': 'Focus on gentle cleansing and hydration.',
+        'ThirtiesFortiesNoAllergies': 'Introduce a hydrating toner and consider adding a moisturizer with SPF and peptides.',
+        'FiftiesBeyondNoAllergies': 'Consider adding a retinol serum at night.',
+        'AllergiesYes': 'Meet the dermatologist.'
+    },
+    'Oily': {
+        'TeensTwentiesNoAllergies': 'Cleanse twice daily and use oil-free products.',
+        'ThirtiesFortiesNoAllergies': 'Continue with oil-free routine and consider adding niacinamide products. Exfoliate 2-3 times a week.',
+        'FiftiesBeyondNoAllergies': 'Opt for a gentle cleanser and lightweight moisturizer. Exfoliate once a week.',
+        'AllergiesYes': 'Meet the dermatologist.'
+    },
+    'Normal': {
+        'TeensTwentiesNoAllergies': 'Cleanse twice daily, moisturize, and wear sunscreen.',
+        'ThirtiesFortiesNoAllergies': 'Introduce a toner and look for a moisturizer with SPF and antioxidants. Exfoliate once a week.',
+        'FiftiesBeyondNoAllergies': 'Consider adding a retinol serum at night.',
+        'AllergiesYes': 'Meet the dermatologist.'
+    },
+    'Combination': {
+        'TeensTwentiesNoAllergies': 'Use a gentle cleanser, targeted moisturizers, and sunscreen.',
+        'ThirtiesFortiesNoAllergies': 'Continue with targeted routine and consider balancing toners/serums. Exfoliate 1-2 times a week.',
+        'FiftiesBeyondNoAllergies': 'Adjust moisturizers and consider adding a retinol serum. Exfoliate once a week.',
+        'AllergiesYes': 'Meet the dermatologist.'
+    },
+    'Sensitive': {
+        'TeensTwentiesNoAllergies': 'Use fragrance-free, hypoallergenic products and avoid harsh chemicals/scrubs.',
+        'ThirtiesFortiesNoAllergies': 'Use fragrance-free, hypoallergenic products and avoid harsh chemicals/scrubs.',
+        'FiftiesBeyondNoAllergies': 'Use fragrance-free, hypoallergenic products and avoid harsh chemicals/scrubs.',
+        'AllergiesYes': 'Meet the dermatologist.'
+    }
 }
-
 
 def preprocess_image(img_path):
     img = image.load_img(img_path, target_size=(300, 300))
@@ -28,18 +52,19 @@ def preprocess_image(img_path):
     img_array = img_array / 255.0
     return img_array
 
-
 @app.route('/')
 def index():
     return render_template('index.html')
 
-
 @app.route('/predict', methods=['POST'])
 def predict():
-    if 'file' not in request.files:
-        return jsonify({'error': 'No file part'})
+    if 'file' not in request.files or 'age' not in request.form or 'allergies' not in request.form:
+        return jsonify({'error': 'Missing required input'})
 
     file = request.files['file']
+    age = request.form['age']
+    allergies = request.form['allergies']
+
     if file.filename == '':
         return jsonify({'error': 'No selected file'})
 
@@ -49,22 +74,30 @@ def predict():
 
         img = preprocess_image(file_path)
         predictions = model.predict(img)
-        print("Predictions:", predictions)  # Debugging line
         class_index = np.argmax(predictions, axis=1)[0]
         classes = ['Dry', 'Oily', 'Normal', 'Combination', 'Sensitive']
         predicted_class = classes[class_index]
 
-        print("Predicted class:", predicted_class)  # Debugging line
-
         os.remove(file_path)  # Remove the saved file after prediction
 
-        # Get recommendations
-        recommended_action = recommendations[predicted_class]
+        # Determine age group and allergy status
+        age_group = ""
+        if 13 <= int(age) <= 19 or 20 <= int(age) <= 29:
+            age_group = "TeensTwenties"
+        elif 30 <= int(age) <= 39 or 40 <= int(age) <= 49:
+            age_group = "ThirtiesForties"
+        elif 50 <= int(age) <= 59 or int(age) >= 60:
+            age_group = "FiftiesBeyond"
 
-        return render_template('index.html', prediction=predicted_class, recommendation=recommended_action)
+        allergy_status = "AllergiesYes" if allergies == "yes" else "NoAllergies"
+
+        # Get recommendations
+        recommendation_key = f"{age_group}{allergy_status}"
+        recommended_action = recommendations[predicted_class].get(recommendation_key, "Meet the dermatologist.")
+
+        return render_template('index.html', prediction=predicted_class, recommendation=recommended_action, image_file=file.filename)
 
     return jsonify({'error': 'Something went wrong'})
-
 
 if __name__ == "__main__":
     app.run(debug=True)
