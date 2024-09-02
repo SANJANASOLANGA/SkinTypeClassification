@@ -3,23 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skin Type Prediction</title>
+    <title>Skin Type Identifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <h1>Upload an Image to Identify Skin Type</h1>
-    <form action="/predict" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept="image/*" required onchange="clearPreviousResults(); previewImage(event)">
-        <br><br>
+    
+    <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
+        <label for="file">Upload Image:</label>
+        <input type="file" name="file" id="file" required>
+        
         <label for="age">Age:</label>
-        <input type="number" name="age" id="age" required>
-        <br><br>
-        <label for="allergies">Do you have any allergies? </label>
+        <input type="number" name="age" id="age" required min="13" max="120">
+        
+        <label for="allergies">Do you have any allergies?</label>
         <select name="allergies" id="allergies" required>
             <option value="no">No</option>
             <option value="yes">Yes</option>
         </select>
-        <br><br>
-        <input type="submit" value="Upload">
+        
+        <input type="submit" value="Identify Skin Type">
     </form>
 
     <div id="results">
