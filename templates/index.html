@@ -11,7 +11,8 @@
     
     <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
         <label for="file">Upload Image:</label>
-        <input type="file" name="file" id="file" required>
+        <input type="file" name="file" id="file" required accept="image/*">
+        <div id="imagePreview"></div>
         
         <label for="age">Age:</label>
         <input type="number" name="age" id="age" required min="13" max="120">
@@ -26,7 +27,6 @@
     </form>
 
     <div id="results">
-
         {% if prediction %}
             <h2>Prediction: {{ prediction }}</h2>
             <p>Recommendations: {{ recommendation }}</p>
@@ -34,27 +34,23 @@
     </div>
 
     <script>
-        function previewImage(event) {
+        document.getElementById('file').addEventListener('change', function(event) {
+            var file = event.target.files[0];
             var reader = new FileReader();
-            reader.onload = function(){
-                var output = document.getElementById('uploadedImage');
-                if (output) {
-                    output.src = reader.result;
-                } else {
-                    var img = document.createElement('img');
-                    img.id = 'uploadedImage';
-                    img.src = reader.result;
-                    img.width = 300;
-                    document.getElementById('results').appendChild(img);
-                }
+            
+            reader.onload = function(e) {
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                img.style.maxWidth = '100%';
+                img.style.maxHeight = '300px';
+                
+                var previewArea = document.getElementById('imagePreview');
+                previewArea.innerHTML = '';
+                previewArea.appendChild(img);
             }
-            reader.readAsDataURL(event.target.files[0]);
-        }
-
-        function clearPreviousResults() {
-            var resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = '';
-        }
+            
+            reader.readAsDataURL(file);
+        });
     </script>
 </body>
 </html>
