@@ -7,7 +7,7 @@ import os
 app = Flask(__name__, static_folder='static')
 
 # Load the trained model
-model = load_model('./SkinType.h5')
+model = load_model('./MobileNetV2.h5')
 
 # Ensure model is ready to make predictions
 model.make_predict_function()
@@ -46,7 +46,7 @@ recommendations = {
 }
 
 def preprocess_image(img_path):
-    img = image.load_img(img_path, target_size=(256, 256))
+    img = image.load_img(img_path, target_size=(224, 224))
     img_array = image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
     img_array = img_array / 255.0
@@ -73,6 +73,7 @@ def predict():
         file.save(file_path)
 
         img = preprocess_image(file_path)
+
         predictions = model.predict(img)
         class_index = np.argmax(predictions, axis=1)[0]
         classes = ['Dry', 'Oily', 'Normal', 'Combination', 'Sensitive']
