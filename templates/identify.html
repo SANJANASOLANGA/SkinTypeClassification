@@ -10,7 +10,7 @@
 <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="file">Upload Image:</label>
-        <h6><i>Upload an image to identify your skin type and get your own skincare routine</i></h6>
+        <h6><i>Upload a clear photo of your cleansed skin to receive a personalized skincare routine. To ensure accurate results, please ensure your skin is free from makeup or other products before taking the image.</i></h6>
         <input type="file" class="form-control-file" id="file" name="file" required>
     </div>
     <div id="imagePreview"></div>
@@ -35,8 +35,8 @@
 
 <div id="results">
     {% if prediction %}
-    <h2>Prediction: {{ prediction }}</h2>
-    <p>Recommendations: {{ recommendation }}</p>
+    <h2>Your skin type is {{ prediction }}</h2>
+    <p><strong>Your Own Skincare Routine:</strong> {{ recommendation }}</p>
     {% endif %}
 </div>
 
