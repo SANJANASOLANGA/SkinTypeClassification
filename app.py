@@ -158,23 +158,31 @@ def predict():
         os.remove(file_path)  # Remove the saved file after prediction
 
         # Determine age group and allergy status
-        age_group = ""
-        if 13 <= int(age) <= 29:
-            age_group = "TeensTwenties"
-        elif 30 <= int(age) <= 49:
-            age_group = "ThirtiesForties"
-        elif int(age) >= 50:
-            age_group = "FiftiesBeyond"
+    age_group = ""
+    if 13 <= int(age) <= 29:
+        age_group = "TeensTwenties"
+    elif 30 <= int(age) <= 49:
+        age_group = "ThirtiesForties"
+    elif int(age) >= 50:
+        age_group = "FiftiesBeyond"
 
-        allergy_status = "AllergiesYes" if allergies == "yes" else "NoAllergies"
+    allergy_status = "AllergiesYes" if allergies == "yes" else "NoAllergies"
 
-        # Get recommendations
-        recommendation_key = f"{age_group}{allergy_status}"
-        recommended_action = recommendations[predicted_class].get(recommendation_key, {})
-        routine = recommended_action.get('Routine', '')
-        tips = recommended_action.get('Tips', '')
+    if allergy_status == "AllergiesYes":
+        recommendation_key = "AllergiesYes"
+    else:
+        recommendation_key = f"{age_group}NoAllergies"
 
-        return render_template('identify.html', prediction=predicted_class, routine=routine, tips=tips, image_file=file.filename)
+    recommended_action = recommendations[predicted_class].get(recommendation_key, {})
+    routine = recommended_action.get('Routine', '')
+    tips = recommended_action.get('Tips', '')
+
+    print(f"Debug - Recommendation Key: {recommendation_key}")
+    print(f"Debug - Recommended Action: {recommended_action}")
+    print(f"Debug - Routine: {routine}")
+    print(f"Debug - Tips: {tips}")
+
+    return render_template('identify.html', prediction=predicted_class, routine=routine, tips=tips, image_file=file.filename)
 
     return jsonify({'error': 'Something went wrong'})
 
