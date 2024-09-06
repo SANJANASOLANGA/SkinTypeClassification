@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Skin Types - Skin Type Identifier{% endblock %}
+{% block content %}
+
+<div class="skin-types-container">
+    <div class="skin-type">
+        <h4>Dry Skin</h4>
+        <img src="{{ url_for('static', filename='src/dry.jpg') }}" alt="Dry Skin Image"
+            class="skin-img">
+        <p class="skin-p">
+            Dry skin is defined by a lack of moisture and insufficient sebum production, leading to a rough texture,
+            tightness, and a dull appearance. This skin type can be prone to flakiness, cracking, and the development of
+            fine lines and deep wrinkles. Dry skin often feels uncomfortable and may react negatively to harsh weather
+            conditions or certain skincare products. To care for dry skin, it is essential to use rich moisturizers that
+            help retain hydration and protect the skin's barrier. Ingredients such as hyaluronic acid and glycerin can
+            be beneficial, as they draw moisture into the skin. Regular exfoliation can also help remove dead skin
+            cells, promoting a smoother surface.
+        </p>
+    </div>
+
+    <div class="skin-type">
+        <h4>Oily Skin</h4>
+        <img src="{{ url_for('static', filename='src/oily.jpg') }}" alt="Oily Skin Image"
+            class="skin-img">
+        <p class="skin-p">
+            Oily skin is characterized by an overproduction of sebum, resulting in a shiny appearance, especially in the
+            T-zone (forehead, nose, and chin). This skin type often has visible pores and is more prone to acne,
+            blackheads, and other blemishes due to the excess oil that can clog pores. While oily skin may seem
+            problematic, it can also have some advantages, such as fewer wrinkles as the skin ages. To manage oily skin,
+            it is important to use lightweight, non-comedogenic products that help control oil without stripping the
+            skin of its natural moisture. Regular cleansing and exfoliation can help prevent breakouts and maintain a
+            clearer complexion.
+        </p>
+    </div>
+
+    <div class="skin-type">
+        <h4>Normal Skin</h4>
+        <img src="{{ url_for('static', filename='src/normal.jpg') }}" alt="Normal Skin Image"
+            class="skin-img">
+        <p class="skin-p">
+            Normal skin is often considered the ideal skin type, characterized by a perfect balance of moisture and oil.
+            Individuals with normal skin typically enjoy a smooth, even texture with fine pores and a fresh, rosy
+            complexion. This skin type is generally resistant to irritations and reactions from environmental factors.
+            To maintain healthy normal skin, it is crucial to follow a balanced skincare routine that includes gentle
+            cleansing, moisturizing, and daily sun protection. However, it is important to note that skin types can
+            evolve over time; for instance, normal skin may become drier as a person ages or due to changes in lifestyle
+            and environmental conditions.
+        </p>
+    </div>
+
+    <div class="skin-type">
+        <h4>Combination Skin</h4>
+        <img src="{{ url_for('static', filename='src/combination.jpg') }}" alt="Combination Skin Image"
+            class="skin-img" width="150px">
+        <p class="skin-p">
+            Combination skin exhibits characteristics of more than one skin type, typically featuring an oily T-zone
+            while the cheeks may be dry or normal. This skin type can be challenging to care for, as different areas
+            require different treatments. For instance, the T-zone may benefit from oil-controlling products, while the
+            drier areas may need more hydration. A tailored skincare routine that addresses the unique needs of each
+            area is essential for maintaining balance and achieving a healthy complexion. Using gentle cleansers and
+            targeted treatments can help manage the varying skin conditions across the face.
+        </p>
+    </div>
+
+    <div class="skin-type">
+        <h4>Sensitive Skin</h4>
+        <img src="{{ url_for('static', filename='src/sensitive.jpg') }}" alt="Sensitive Skin Image"
+            class="skin-img">
+        <p class="skin-p">
+            Sensitive skin is often reactive and can be prone to redness, irritation, and discomfort. Individuals with
+            sensitive skin may experience adverse reactions to certain skincare products, environmental factors, or
+            temperature changes. This skin type requires special care, with a focus on using gentle, fragrance-free
+            products that soothe and protect the skin barrier. Ingredients like aloe vera, chamomile, and calendula can
+            be beneficial for calming irritation. It is also advisable to perform patch tests when trying new products
+            to avoid potential reactions.
+        </p>
+    </div>
+</div>
+{% endblock %}

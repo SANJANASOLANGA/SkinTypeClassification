@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Skin Type Identifier{% endblock %}
+
+{% block content %}
+
+
+<img src="{{ url_for('static', filename='src/home.jpeg') }}" alt="SkincareForYou" width="700px" class="skin-img" />
+<div style="text-align: center;">
+    <h1>Welcome to GlowUpGuide !!!</h1>
+
+    <h5>Your skin is unique, and so should your skincare routine.</h5>
+    <div style="text-align: center; margin: 0 auto; margin-bottom: 9px;"><a href="{{ url_for('identify') }}"><button
+                class="btn btn-primary">Go to Skincare</button></a></div>
+    <h6><i>Discover your skin type with our AI-powered tool and get personalized recommendations tailored to your
+            needs.</i></h6>
+    <!-- <h6><i>Upload a photo of your skin and let our algorithm do the work. In just a few clicks, you'll have a deeper
+    understanding of your skin and how to care for it optimally.</i></h6> -->
+    <h4>Start your skincare journey today!</h4>
+</div>
+
+
+{% endblock %}

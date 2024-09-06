@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - Skin Type Identifier{% endblock %}
+
+{% block content %}
+<h1>Who we are?</h1>
+<p>Welcome to <span style="color: #bb0282;">GlowUpGuide</span></p>
+<p>We are dedicated to helping you achieve healthy,
+    glowing skin. Our website offers
+    personalized skincare recommendations based on your skin type, age, and allergies.</p>
+<p>As final-year IT undergraduates,
+    we've combined our technical skills with our passion for skincare to create a user-friendly platform. Simply upload
+    a photo of your skin, provide your age, allergy status, and we'll generate a tailored skincare plan. Our goal is to
+    make it easy for you to achieve healthy, radiant skin.</p>
+<p>Join us on this journey to healthy, glowing skin. Together, we can unlock the secrets to a radiant complexion.</p>
+<img src="{{ url_for('static', filename='src/about.webp') }}" alt="SkincareForYou" width="700px" class="skin-img" />
+{% endblock %}

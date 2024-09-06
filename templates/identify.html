@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Identify Your Skin Type - Skin Type Identifier{% endblock %}
+
+{% block content %}
+
+<h1>Get Your Own Skincare Routine</h1>
+
+
+<form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="file">Upload Image:</label>
+        <input type="file" class="form-control-file" id="file" name="file" required>
+        <h6><i>Upload a clear photo of your cleansed skin to receive a personalized skincare routine. To ensure accurate results, please ensure your skin is free from makeup or other products before taking the image.</i></h6>
+    </div>
+    <div id="imagePreview"></div>
+    <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="number" class="form-control" id="age" name="age" required>
+    </div>
+    <div class="form-container">
+        <label>Do you have any allergies?</label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="allergies" id="allergiesNo" value="no" checked>
+            <label class="form-check-label" for="allergiesNo">No</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="allergies" id="allergiesYes" value="yes">
+            <label class="form-check-label" for="allergiesYes">Yes</label>
+        </div>
+    </div>
+    <div style="text-align: center; margin: 0 auto;"><button type="submit" class="btn btn-primary">Identify Skin Type</button></div>
+    
+</form>
+
+<div id="results">
+    {% if message %}
+        <h2>{{ message }}</h2>
+    {% endif %}
+    {% if prediction %}
+        <h2>Your skin type is {{ prediction }}</h2>
+    {% endif %}
+    {% if routine %}
+        <p><strong>Routine:</strong> {{ routine }}</p>
+    {% endif %}
+    {% if tips %}
+        <p><strong>Tips:</strong> {{ tips }}</p>
+    {% endif %}
+</div>
+
+<script>
+    document.getElementById('file').addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var img = document.createElement('img');
+            img.src = e.target.result;
+            img.width = 300;
+            var preview = document.getElementById('imagePreview');
+            preview.innerHTML = '';
+            preview.appendChild(img);
+        }
+        reader.readAsDataURL(file);
+    });
+</script>
+{% endblock %}
