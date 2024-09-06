@@ -184,6 +184,18 @@ def predict():
     if file.filename == '':
         return jsonify({'error': 'No selected file'})
 
+    if age < 13:
+        return render_template('identify.html', 
+                               message="For children under 13, we recommend consulting a pediatrician for personalized skincare advice.",
+                               routine="Consult a pediatrician",
+                               tips="Use gentle, child-friendly products suitable for sensitive skin.")
+
+    if age > 70:
+        return render_template('identify.html', 
+                               message="For adults over 70, we recommend consulting a dermatologist for personalized skincare advice.",
+                               routine="Consult a dermatologist",
+                               tips="Focus on gentle, hydrating products suitable for mature skin.")
+
     if file:
         file_path = os.path.join('./', file.filename)
         file.save(file_path)
@@ -198,22 +210,16 @@ def predict():
         os.remove(file_path)  # Remove the saved file after prediction
 
         # Determine age group and allergy status
-        if age < 13:
-            age_group = "Under13"
-        elif 13 <= age <= 29:
+        if 13 <= age <= 29:
             age_group = "TeensTwenties"
         elif 30 <= age <= 49:
             age_group = "ThirtiesForties"
-        elif 50 <= age <= 69:
-            age_group = "FiftiesBeyond"
-        else:
-            age_group = "Over70"
+        else:  # 50-70
+            age_group = "FiftiesSixties"
 
         allergy_status = "AllergiesYes" if allergies == "yes" else "NoAllergies"
 
-        if age_group in ["Under13", "Over70"]:
-            recommendation_key = age_group
-        elif allergy_status == "AllergiesYes":
+        if allergy_status == "AllergiesYes":
             recommendation_key = "AllergiesYes"
         else:
             recommendation_key = f"{age_group}NoAllergies"
@@ -225,6 +231,7 @@ def predict():
         return render_template('identify.html', prediction=predicted_class, routine=routine, tips=tips, image_file=file.filename)
 
     return jsonify({'error': 'Something went wrong'})
+
 
 if __name__ == "__main__":
     app.run(debug=True)
