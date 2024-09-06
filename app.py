@@ -177,10 +177,10 @@ def predict():
     routine = recommended_action.get('Routine', '')
     tips = recommended_action.get('Tips', '')
 
-    print(f"Debug - Recommendation Key: {recommendation_key}")
-    print(f"Debug - Recommended Action: {recommended_action}")
-    print(f"Debug - Routine: {routine}")
-    print(f"Debug - Tips: {tips}")
+    # print(f"Debug - Recommendation Key: {recommendation_key}")
+    # print(f"Debug - Recommended Action: {recommended_action}")
+    # print(f"Debug - Routine: {routine}")
+    # print(f"Debug - Tips: {tips}")
 
     return render_template('identify.html', prediction=predicted_class, routine=routine, tips=tips, image_file=file.filename)
 
