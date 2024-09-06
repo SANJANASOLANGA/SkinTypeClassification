@@ -10,8 +10,8 @@
 <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="file">Upload Image:</label>
-        <h6><i>Upload a clear photo of your cleansed skin to receive a personalized skincare routine. To ensure accurate results, please ensure your skin is free from makeup or other products before taking the image.</i></h6>
         <input type="file" class="form-control-file" id="file" name="file" required>
+        <h6><i>Upload a clear photo of your cleansed skin to receive a personalized skincare routine. To ensure accurate results, please ensure your skin is free from makeup or other products before taking the image.</i></h6>
     </div>
     <div id="imagePreview"></div>
     <div class="form-group">
