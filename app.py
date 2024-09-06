@@ -14,34 +14,94 @@ model.make_predict_function()
 
 recommendations = {
     'Dry': {
-        'TeensTwentiesNoAllergies': 'Routine: Gentle cleansing, hydrating moisturizer, sunscreen.\nTips: Drink plenty of water, avoid hot showers, consider a humidifier.',
-        'ThirtiesFortiesNoAllergies': 'Routine: Gentle cleansing, hydrating toner, moisturizer with SPF, weekly exfoliation.\nTips: Incorporate a hyaluronic acid serum for intense hydration, use a gentle exfoliant like a chemical peel.',
-        'FiftiesBeyondNoAllergies': 'Routine: Gentle cleansing, hydrating serum, moisturizer with SPF, weekly exfoliation, retinol at night.\nTips: Consider using a gentle eye cream to address fine lines and wrinkles, avoid harsh products that can irritate sensitive skin.',
-        'AllergiesYes': 'Routine: Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.\nTips: Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
+        'TeensTwentiesNoAllergies': {
+            'Routine': 'Gentle cleansing, hydrating moisturizer, sunscreen.',
+            'Tips': 'Drink plenty of water, avoid hot showers, consider a humidifier.'
+        },
+        'ThirtiesFortiesNoAllergies': {
+            'Routine': 'Gentle cleansing, hydrating toner, moisturizer with SPF, weekly exfoliation.',
+            'Tips': 'Incorporate a hyaluronic acid serum for intense hydration, use a gentle exfoliant like a chemical peel.'
+        },
+        'FiftiesBeyondNoAllergies': {
+            'Routine': 'Gentle cleansing, hydrating serum, moisturizer with SPF, weekly exfoliation, retinol at night.',
+            'Tips': 'Consider using a gentle eye cream to address fine lines and wrinkles, avoid harsh products that can irritate sensitive skin.'
+        },
+        'AllergiesYes': {
+            'Routine': 'Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.',
+            'Tips': 'Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
+        }
     },
     'Oily': {
-        'TeensTwentiesNoAllergies': 'Routine: Twice-daily cleansing, oil-free moisturizer, sunscreen, weekly exfoliation.\nTips: Avoid heavy makeup and greasy foods, use blotting papers to control shine.',
-        'ThirtiesFortiesNoAllergies': 'Routine: Twice-daily cleansing, oil-free moisturizer, sunscreen, niacinamide serum, 2-3 times weekly exfoliation.\nTips: Consider using a clay mask to absorb excess oil, avoid over-washing, which can lead to more oil production.',
-        'FiftiesBeyondNoAllergies': 'Routine: Gentle cleansing, lightweight moisturizer, sunscreen, weekly exfoliation.\nTips: As skin naturally becomes less oily with age, adjust your routine accordingly.',
-        'AllergiesYes': 'Routine: Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.\nTips: Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
+        'TeensTwentiesNoAllergies': {
+            'Routine': 'Twice-daily cleansing, oil-free moisturizer, sunscreen, weekly exfoliation.',
+            'Tips': 'Avoid heavy makeup and greasy foods, use blotting papers to control shine.'
+        },
+        'ThirtiesFortiesNoAllergies': {
+            'Routine': 'Twice-daily cleansing, oil-free moisturizer, sunscreen, niacinamide serum, 2-3 times weekly exfoliation.',
+            'Tips': 'Consider using a clay mask to absorb excess oil, avoid over-washing, which can lead to more oil production.'
+        },
+        'FiftiesBeyondNoAllergies': {
+            'Routine': 'Gentle cleansing, lightweight moisturizer, sunscreen, weekly exfoliation.',
+            'Tips': 'As skin naturally becomes less oily with age, adjust your routine accordingly.'
+        },
+        'AllergiesYes': {
+            'Routine': 'Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.',
+            'Tips': 'Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
+        }
     },
     'Normal': {
-        'TeensTwentiesNoAllergies': 'Routine: Twice-daily cleansing, moisturizer, sunscreen.\nTips: Maintain a balanced diet and adequate hydration.',
-        'ThirtiesFortiesNoAllergies': 'Routine: Twice-daily cleansing, hydrating toner, moisturizer with SPF, weekly exfoliation.\nTips: Consider adding a retinol serum at night for anti-aging benefits.',
-        'FiftiesBeyondNoAllergies': 'Routine: Gentle cleansing, hydrating serum, moisturizer with SPF, weekly exfoliation, retinol at night.\nTips: Use a gentle eye cream to address fine lines and wrinkles.',
-        'AllergiesYes': 'Routine: Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.\nTips: Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
+        'TeensTwentiesNoAllergies': {
+            'Routine': 'Twice-daily cleansing, moisturizer, sunscreen.',
+            'Tips': 'Maintain a balanced diet and adequate hydration.'
+        },
+        'ThirtiesFortiesNoAllergies': {
+            'Routine': 'Twice-daily cleansing, hydrating toner, moisturizer with SPF, weekly exfoliation.',
+            'Tips': 'Consider adding a retinol serum at night for anti-aging benefits.'
+        },
+        'FiftiesBeyondNoAllergies': {
+            'Routine': 'Gentle cleansing, hydrating serum, moisturizer with SPF, weekly exfoliation, retinol at night.',
+            'Tips': 'Use a gentle eye cream to address fine lines and wrinkles.'
+        },
+        'AllergiesYes': {
+            'Routine': 'Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.',
+            'Tips': 'Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
+        }
     },
     'Combination': {
-        'TeensTwentiesNoAllergies': 'Routine: Twice-daily cleansing, targeted moisturizer, sunscreen, weekly exfoliation.\nTips: Use a clay mask for oily areas and a hydrating mask for dry areas.',
-        'ThirtiesFortiesNoAllergies': 'Routine: Twice-daily cleansing, balancing toner, targeted moisturizer, sunscreen, 1-2 times weekly exfoliation.\nTips: Consider using a dual-action cleanser that addresses both oily and dry areas.',
-        'FiftiesBeyondNoAllergies': 'Routine: Gentle cleansing, targeted moisturizer, sunscreen, weekly exfoliation.\nTips: As skin naturally becomes less oily with age, adjust your routine accordingly.',
-        'AllergiesYes': 'Routine: Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.\nTips: Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
+        'TeensTwentiesNoAllergies': {
+            'Routine': 'Twice-daily cleansing, targeted moisturizer, sunscreen, weekly exfoliation.',
+            'Tips': 'Use a clay mask for oily areas and a hydrating mask for dry areas.'
+        },
+        'ThirtiesFortiesNoAllergies': {
+            'Routine': 'Twice-daily cleansing, balancing toner, targeted moisturizer, sunscreen, 1-2 times weekly exfoliation.',
+            'Tips': 'Consider using a dual-action cleanser that addresses both oily and dry areas.'
+        },
+        'FiftiesBeyondNoAllergies': {
+            'Routine': 'Gentle cleansing, targeted moisturizer, sunscreen, weekly exfoliation.',
+            'Tips': 'As skin naturally becomes less oily with age, adjust your routine accordingly.'
+        },
+        'AllergiesYes': {
+            'Routine': 'Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.',
+            'Tips': 'Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
+        }
     },
     'Sensitive': {
-        'TeensTwentiesNoAllergies': 'Routine: Gentle cleansing, hypoallergenic moisturizer, sunscreen.\nTips: Avoid harsh chemicals, fragrances, and alcohol-based products.',
-        'ThirtiesFortiesNoAllergies': 'Routine: Gentle cleansing, hypoallergenic moisturizer, sunscreen.\nTips: Consider using a calming serum with ingredients like chamomile or aloe vera.',
-        'FiftiesBeyondNoAllergies': 'Routine: Gentle cleansing, hypoallergenic moisturizer, sunscreen.\nTips: Use a gentle eye cream to address fine lines and wrinkles.',
-        'AllergiesYes': 'Routine: Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.\nTips: Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
+        'TeensTwentiesNoAllergies': {
+            'Routine': 'Gentle cleansing, hypoallergenic moisturizer, sunscreen.',
+            'Tips': 'Avoid harsh chemicals, fragrances, and alcohol-based products.'
+        },
+        'ThirtiesFortiesNoAllergies': {
+            'Routine': 'Gentle cleansing, hypoallergenic moisturizer, sunscreen.',
+            'Tips': 'Consider using a calming serum with ingredients like chamomile or aloe vera.'
+        },
+        'FiftiesBeyondNoAllergies': {
+            'Routine': 'Gentle cleansing, hypoallergenic moisturizer, sunscreen.',
+            'Tips': 'Use a gentle eye cream to address fine lines and wrinkles.'
+        },
+        'AllergiesYes': {
+            'Routine': 'Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.',
+            'Tips': 'Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
+        }
     }
 }
 
@@ -99,20 +159,22 @@ def predict():
 
         # Determine age group and allergy status
         age_group = ""
-        if 13 <= int(age) <= 19 or 20 <= int(age) <= 29:
+        if 13 <= int(age) <= 29:
             age_group = "TeensTwenties"
-        elif 30 <= int(age) <= 39 or 40 <= int(age) <= 49:
+        elif 30 <= int(age) <= 49:
             age_group = "ThirtiesForties"
-        elif 50 <= int(age) <= 59 or int(age) >= 60:
+        elif int(age) >= 50:
             age_group = "FiftiesBeyond"
 
         allergy_status = "AllergiesYes" if allergies == "yes" else "NoAllergies"
 
         # Get recommendations
         recommendation_key = f"{age_group}{allergy_status}"
-        recommended_action = recommendations[predicted_class].get(recommendation_key, "")
+        recommended_action = recommendations[predicted_class].get(recommendation_key, {})
+        routine = recommended_action.get('Routine', '')
+        tips = recommended_action.get('Tips', '')
 
-        return render_template('identify.html', prediction=predicted_class, recommendation=recommended_action, image_file=file.filename)
+        return render_template('identify.html', prediction=predicted_class, routine=routine, tips=tips, image_file=file.filename)
 
     return jsonify({'error': 'Something went wrong'})
 
