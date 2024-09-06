@@ -33,7 +33,7 @@ body {
 .nav-item{
 margin-left: 20px;
 }
-h1, h2 {
+h1, h2, h6 {
     color: #bb0282;
     margin-bottom: 20px;
     margin-top: 30px;
@@ -84,4 +84,13 @@ h1, h2 {
 
  .form-check-input:checked {
     accent-color: #bb0282; 
+}
+.form-container {
+    display: flex;
+    flex-wrap: wrap; 
+  }
+
+.form-check{
+    margin-right: 15px;
+    margin-left: 15px;
 }
