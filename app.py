@@ -14,34 +14,34 @@ model.make_predict_function()
 
 recommendations = {
     'Dry': {
-        'TeensTwentiesNoAllergies': 'Focus on gentle cleansing and hydration.',
-        'ThirtiesFortiesNoAllergies': 'Introduce a hydrating toner and consider adding a moisturizer with SPF and peptides.',
-        'FiftiesBeyondNoAllergies': 'Consider adding a retinol serum at night.',
-        'AllergiesYes': 'Meet the dermatologist.'
+        'TeensTwentiesNoAllergies': 'Routine: Gentle cleansing, hydrating moisturizer, sunscreen.\nTips: Drink plenty of water, avoid hot showers, consider a humidifier.',
+        'ThirtiesFortiesNoAllergies': 'Routine: Gentle cleansing, hydrating toner, moisturizer with SPF, weekly exfoliation.\nTips: Incorporate a hyaluronic acid serum for intense hydration, use a gentle exfoliant like a chemical peel.',
+        'FiftiesBeyondNoAllergies': 'Routine: Gentle cleansing, hydrating serum, moisturizer with SPF, weekly exfoliation, retinol at night.\nTips: Consider using a gentle eye cream to address fine lines and wrinkles, avoid harsh products that can irritate sensitive skin.',
+        'AllergiesYes': 'Routine: Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.\nTips: Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
     },
     'Oily': {
-        'TeensTwentiesNoAllergies': 'Cleanse twice daily and use oil-free products.',
-        'ThirtiesFortiesNoAllergies': 'Continue with oil-free routine and consider adding niacinamide products. Exfoliate 2-3 times a week.',
-        'FiftiesBeyondNoAllergies': 'Opt for a gentle cleanser and lightweight moisturizer. Exfoliate once a week.',
-        'AllergiesYes': 'Meet the dermatologist.'
+        'TeensTwentiesNoAllergies': 'Routine: Twice-daily cleansing, oil-free moisturizer, sunscreen, weekly exfoliation.\nTips: Avoid heavy makeup and greasy foods, use blotting papers to control shine.',
+        'ThirtiesFortiesNoAllergies': 'Routine: Twice-daily cleansing, oil-free moisturizer, sunscreen, niacinamide serum, 2-3 times weekly exfoliation.\nTips: Consider using a clay mask to absorb excess oil, avoid over-washing, which can lead to more oil production.',
+        'FiftiesBeyondNoAllergies': 'Routine: Gentle cleansing, lightweight moisturizer, sunscreen, weekly exfoliation.\nTips: As skin naturally becomes less oily with age, adjust your routine accordingly.',
+        'AllergiesYes': 'Routine: Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.\nTips: Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
     },
     'Normal': {
-        'TeensTwentiesNoAllergies': 'Cleanse twice daily, moisturize, and wear sunscreen.',
-        'ThirtiesFortiesNoAllergies': 'Introduce a toner and look for a moisturizer with SPF and antioxidants. Exfoliate once a week.',
-        'FiftiesBeyondNoAllergies': 'Consider adding a retinol serum at night.',
-        'AllergiesYes': 'Meet the dermatologist.'
+        'TeensTwentiesNoAllergies': 'Routine: Twice-daily cleansing, moisturizer, sunscreen.\nTips: Maintain a balanced diet and adequate hydration.',
+        'ThirtiesFortiesNoAllergies': 'Routine: Twice-daily cleansing, hydrating toner, moisturizer with SPF, weekly exfoliation.\nTips: Consider adding a retinol serum at night for anti-aging benefits.',
+        'FiftiesBeyondNoAllergies': 'Routine: Gentle cleansing, hydrating serum, moisturizer with SPF, weekly exfoliation, retinol at night.\nTips: Use a gentle eye cream to address fine lines and wrinkles.',
+        'AllergiesYes': 'Routine: Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.\nTips: Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
     },
     'Combination': {
-        'TeensTwentiesNoAllergies': 'Use a gentle cleanser, targeted moisturizers, and sunscreen.',
-        'ThirtiesFortiesNoAllergies': 'Continue with targeted routine and consider balancing toners/serums. Exfoliate 1-2 times a week.',
-        'FiftiesBeyondNoAllergies': 'Adjust moisturizers and consider adding a retinol serum. Exfoliate once a week.',
-        'AllergiesYes': 'Meet the dermatologist.'
+        'TeensTwentiesNoAllergies': 'Routine: Twice-daily cleansing, targeted moisturizer, sunscreen, weekly exfoliation.\nTips: Use a clay mask for oily areas and a hydrating mask for dry areas.',
+        'ThirtiesFortiesNoAllergies': 'Routine: Twice-daily cleansing, balancing toner, targeted moisturizer, sunscreen, 1-2 times weekly exfoliation.\nTips: Consider using a dual-action cleanser that addresses both oily and dry areas.',
+        'FiftiesBeyondNoAllergies': 'Routine: Gentle cleansing, targeted moisturizer, sunscreen, weekly exfoliation.\nTips: As skin naturally becomes less oily with age, adjust your routine accordingly.',
+        'AllergiesYes': 'Routine: Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.\nTips: Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
     },
     'Sensitive': {
-        'TeensTwentiesNoAllergies': 'Use fragrance-free, hypoallergenic products and avoid harsh chemicals/scrubs.',
-        'ThirtiesFortiesNoAllergies': 'Use fragrance-free, hypoallergenic products and avoid harsh chemicals/scrubs.',
-        'FiftiesBeyondNoAllergies': 'Use fragrance-free, hypoallergenic products and avoid harsh chemicals/scrubs.',
-        'AllergiesYes': 'Meet the dermatologist.'
+        'TeensTwentiesNoAllergies': 'Routine: Gentle cleansing, hypoallergenic moisturizer, sunscreen.\nTips: Avoid harsh chemicals, fragrances, and alcohol-based products.',
+        'ThirtiesFortiesNoAllergies': 'Routine: Gentle cleansing, hypoallergenic moisturizer, sunscreen.\nTips: Consider using a calming serum with ingredients like chamomile or aloe vera.',
+        'FiftiesBeyondNoAllergies': 'Routine: Gentle cleansing, hypoallergenic moisturizer, sunscreen.\nTips: Use a gentle eye cream to address fine lines and wrinkles.',
+        'AllergiesYes': 'Routine: Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.\nTips: Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
     }
 }
 
@@ -110,7 +110,7 @@ def predict():
 
         # Get recommendations
         recommendation_key = f"{age_group}{allergy_status}"
-        recommended_action = recommendations[predicted_class].get(recommendation_key, "Meet the dermatologist.")
+        recommended_action = recommendations[predicted_class].get(recommendation_key, "")
 
         return render_template('identify.html', prediction=predicted_class, recommendation=recommended_action, image_file=file.filename)
 
