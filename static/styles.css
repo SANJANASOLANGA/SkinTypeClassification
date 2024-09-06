@@ -23,7 +23,9 @@ body {
 .nav-link:hover {
     color: #bb0282 !important;
 }
-
+.nav-item{
+margin-left: 20px;
+}
 h1, h2 {
     color: #bb0282;
     margin-bottom: 20px;
