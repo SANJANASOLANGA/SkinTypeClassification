@@ -29,6 +29,14 @@ recommendations = {
         'AllergiesYes': {
             'Routine': 'Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.',
             'Tips': 'Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
+        },
+        'Under13': {
+            'Routine': 'Consult a pediatrician for personalized skincare advice.',
+            'Tips': 'Use gentle, child-friendly products suitable for sensitive skin.'
+        },
+        'Over70': {
+            'Routine': 'Consult a dermatologist for personalized skincare advice.',
+            'Tips': 'Focus on gentle, hydrating products suitable for mature skin.'
         }
     },
     'Oily': {
@@ -47,6 +55,14 @@ recommendations = {
         'AllergiesYes': {
             'Routine': 'Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.',
             'Tips': 'Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
+        },
+        'Under13': {
+            'Routine': 'Consult a pediatrician for personalized skincare advice.',
+            'Tips': 'Use gentle, child-friendly products suitable for sensitive skin.'
+        },
+        'Over70': {
+            'Routine': 'Consult a dermatologist for personalized skincare advice.',
+            'Tips': 'Focus on gentle, hydrating products suitable for mature skin.'
         }
     },
     'Normal': {
@@ -65,6 +81,14 @@ recommendations = {
         'AllergiesYes': {
             'Routine': 'Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.',
             'Tips': 'Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
+        },
+        'Under13': {
+            'Routine': 'Consult a pediatrician for personalized skincare advice.',
+            'Tips': 'Use gentle, child-friendly products suitable for sensitive skin.'
+        },
+        'Over70': {
+            'Routine': 'Consult a dermatologist for personalized skincare advice.',
+            'Tips': 'Focus on gentle, hydrating products suitable for mature skin.'
         }
     },
     'Combination': {
@@ -83,6 +107,14 @@ recommendations = {
         'AllergiesYes': {
             'Routine': 'Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.',
             'Tips': 'Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
+        },
+        'Under13': {
+            'Routine': 'Consult a pediatrician for personalized skincare advice.',
+            'Tips': 'Use gentle, child-friendly products suitable for sensitive skin.'
+        },
+        'Over70': {
+            'Routine': 'Consult a dermatologist for personalized skincare advice.',
+            'Tips': 'Focus on gentle, hydrating products suitable for mature skin.'
         }
     },
     'Sensitive': {
@@ -101,6 +133,14 @@ recommendations = {
         'AllergiesYes': {
             'Routine': 'Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.',
             'Tips': 'Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
+        },
+        'Under13': {
+            'Routine': 'Consult a pediatrician for personalized skincare advice.',
+            'Tips': 'Use gentle, child-friendly products suitable for sensitive skin.'
+        },
+        'Over70': {
+            'Routine': 'Consult a dermatologist for personalized skincare advice.',
+            'Tips': 'Focus on gentle, hydrating products suitable for mature skin.'
         }
     }
 }
@@ -138,7 +178,7 @@ def predict():
         return jsonify({'error': 'Missing required input'})
 
     file = request.files['file']
-    age = request.form['age']
+    age = int(request.form['age'])
     allergies = request.form['allergies']
 
     if file.filename == '':
@@ -158,31 +198,31 @@ def predict():
         os.remove(file_path)  # Remove the saved file after prediction
 
         # Determine age group and allergy status
-    age_group = ""
-    if 13 <= int(age) <= 29:
-        age_group = "TeensTwenties"
-    elif 30 <= int(age) <= 49:
-        age_group = "ThirtiesForties"
-    elif int(age) >= 50:
-        age_group = "FiftiesBeyond"
+        if age < 13:
+            age_group = "Under13"
+        elif 13 <= age <= 29:
+            age_group = "TeensTwenties"
+        elif 30 <= age <= 49:
+            age_group = "ThirtiesForties"
+        elif 50 <= age <= 69:
+            age_group = "FiftiesBeyond"
+        else:
+            age_group = "Over70"
 
-    allergy_status = "AllergiesYes" if allergies == "yes" else "NoAllergies"
+        allergy_status = "AllergiesYes" if allergies == "yes" else "NoAllergies"
 
-    if allergy_status == "AllergiesYes":
-        recommendation_key = "AllergiesYes"
-    else:
-        recommendation_key = f"{age_group}NoAllergies"
+        if age_group in ["Under13", "Over70"]:
+            recommendation_key = age_group
+        elif allergy_status == "AllergiesYes":
+            recommendation_key = "AllergiesYes"
+        else:
+            recommendation_key = f"{age_group}NoAllergies"
 
-    recommended_action = recommendations[predicted_class].get(recommendation_key, {})
-    routine = recommended_action.get('Routine', '')
-    tips = recommended_action.get('Tips', '')
+        recommended_action = recommendations[predicted_class].get(recommendation_key, {})
+        routine = recommended_action.get('Routine', '')
+        tips = recommended_action.get('Tips', '')
 
-    # print(f"Debug - Recommendation Key: {recommendation_key}")
-    # print(f"Debug - Recommended Action: {recommended_action}")
-    # print(f"Debug - Routine: {routine}")
-    # print(f"Debug - Tips: {tips}")
-
-    return render_template('identify.html', prediction=predicted_class, routine=routine, tips=tips, image_file=file.filename)
+        return render_template('identify.html', prediction=predicted_class, routine=routine, tips=tips, image_file=file.filename)
 
     return jsonify({'error': 'Something went wrong'})
 
