@@ -23,6 +23,13 @@ body {
 .nav-link:hover {
     color: #bb0282 !important;
 }
+
+.nav-link.active {
+    color: #bb0282 !important;
+    font-weight: bolder;
+    font-size: large;
+}
+
 .nav-item{
 margin-left: 20px;
 }
