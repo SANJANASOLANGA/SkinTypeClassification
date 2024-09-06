@@ -5,11 +5,12 @@
 {% block content %}
 
 <h1>Get Your Own Skincare Routine</h1>
-<h6><i>Upload an image to identify your skin type and get your own skincare routine</i></h6>
+
 
 <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="file">Upload Image:</label>
+        <h6><i>Upload an image to identify your skin type and get your own skincare routine</i></h6>
         <input type="file" class="form-control-file" id="file" name="file" required>
     </div>
     <div id="imagePreview"></div>
