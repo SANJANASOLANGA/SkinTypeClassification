@@ -30,14 +30,6 @@ recommendations = {
             'Routine': 'Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.',
             'Tips': 'Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
         },
-        'Under13': {
-            'Routine': 'Consult a pediatrician for personalized skincare advice.',
-            'Tips': 'Use gentle, child-friendly products suitable for sensitive skin.'
-        },
-        'Over70': {
-            'Routine': 'Consult a dermatologist for personalized skincare advice.',
-            'Tips': 'Focus on gentle, hydrating products suitable for mature skin.'
-        }
     },
     'Oily': {
         'TeensTwentiesNoAllergies': {
@@ -56,14 +48,6 @@ recommendations = {
             'Routine': 'Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.',
             'Tips': 'Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
         },
-        'Under13': {
-            'Routine': 'Consult a pediatrician for personalized skincare advice.',
-            'Tips': 'Use gentle, child-friendly products suitable for sensitive skin.'
-        },
-        'Over70': {
-            'Routine': 'Consult a dermatologist for personalized skincare advice.',
-            'Tips': 'Focus on gentle, hydrating products suitable for mature skin.'
-        }
     },
     'Normal': {
         'TeensTwentiesNoAllergies': {
@@ -82,14 +66,6 @@ recommendations = {
             'Routine': 'Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.',
             'Tips': 'Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
         },
-        'Under13': {
-            'Routine': 'Consult a pediatrician for personalized skincare advice.',
-            'Tips': 'Use gentle, child-friendly products suitable for sensitive skin.'
-        },
-        'Over70': {
-            'Routine': 'Consult a dermatologist for personalized skincare advice.',
-            'Tips': 'Focus on gentle, hydrating products suitable for mature skin.'
-        }
     },
     'Combination': {
         'TeensTwentiesNoAllergies': {
@@ -108,14 +84,6 @@ recommendations = {
             'Routine': 'Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.',
             'Tips': 'Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
         },
-        'Under13': {
-            'Routine': 'Consult a pediatrician for personalized skincare advice.',
-            'Tips': 'Use gentle, child-friendly products suitable for sensitive skin.'
-        },
-        'Over70': {
-            'Routine': 'Consult a dermatologist for personalized skincare advice.',
-            'Tips': 'Focus on gentle, hydrating products suitable for mature skin.'
-        }
     },
     'Sensitive': {
         'TeensTwentiesNoAllergies': {
@@ -134,14 +102,6 @@ recommendations = {
             'Routine': 'Use fragrance-free, hypoallergenic products, avoid harsh chemicals and scrubs.',
             'Tips': 'Patch test new products before applying them to your face, consult a dermatologist for allergy testing.'
         },
-        'Under13': {
-            'Routine': 'Consult a pediatrician for personalized skincare advice.',
-            'Tips': 'Use gentle, child-friendly products suitable for sensitive skin.'
-        },
-        'Over70': {
-            'Routine': 'Consult a dermatologist for personalized skincare advice.',
-            'Tips': 'Focus on gentle, hydrating products suitable for mature skin.'
-        }
     }
 }
 
