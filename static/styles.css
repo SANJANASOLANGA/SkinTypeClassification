@@ -27,7 +27,7 @@ body {
 .nav-link.active {
     color: #bb0282 !important;
     font-weight: bolder;
-    font-size: large;
+    /* font-size: large; */
 }
 
 .nav-item{
@@ -81,3 +81,7 @@ h1, h2 {
     width: 70px;
     margin-right: 10px;
   }
+
+ .form-check-input:checked {
+    accent-color: #bb0282; 
+}
