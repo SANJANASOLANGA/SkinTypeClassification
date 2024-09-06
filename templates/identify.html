@@ -36,7 +36,10 @@
 <div id="results">
     {% if prediction %}
     <h2>Your skin type is {{ prediction }}</h2>
-    <p><strong>Your Own Skincare Routine:</strong> {{ recommendation }}</p>
+    <!-- <p><strong>Your Own Skincare Routine:</strong> {{ recommendation }}</p> -->
+    <!-- <h3>Your Own Skincare Routine:</h3> -->
+    <p><strong>Routine:</strong> {{ routine }}</p>
+    <p><strong>Tips:</strong> {{ tips }}</p>
     {% endif %}
 </div>
 
