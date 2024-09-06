@@ -53,8 +53,24 @@ def preprocess_image(img_path):
     return img_array
 
 @app.route('/')
-def index():
-    return render_template('index.html')
+def home():
+    return render_template('home.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/skin_types')
+def skin_types():
+    return render_template('skin_types.html')
+
+@app.route('/identify')
+def identify():
+    return render_template('identify.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -96,7 +112,7 @@ def predict():
         recommendation_key = f"{age_group}{allergy_status}"
         recommended_action = recommendations[predicted_class].get(recommendation_key, "Meet the dermatologist.")
 
-        return render_template('index.html', prediction=predicted_class, recommendation=recommended_action, image_file=file.filename)
+        return render_template('identify.html', prediction=predicted_class, recommendation=recommended_action, image_file=file.filename)
 
     return jsonify({'error': 'Something went wrong'})
 
