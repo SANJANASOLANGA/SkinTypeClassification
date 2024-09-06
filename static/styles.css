@@ -98,3 +98,7 @@ h1, h2 {
 .form-group{
     font-weight: bolder;
 }
+.skin-img{
+    display: block; 
+    margin: 0 auto;
+}
