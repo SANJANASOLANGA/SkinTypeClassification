@@ -175,7 +175,7 @@ def predict():
         elif 30 <= age <= 49:
             age_group = "ThirtiesForties"
         else:  # 50-70
-            age_group = "FiftiesSixties"
+            age_group = "FiftiesBeyond"
 
         allergy_status = "AllergiesYes" if allergies == "yes" else "NoAllergies"
 
