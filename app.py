@@ -132,7 +132,7 @@ def identify():
 def contact():
     return render_template('contact.html')
 
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['POST', 'GET'])
 def predict():
     if 'file' not in request.files or 'age' not in request.form or 'allergies' not in request.form:
         return jsonify({'error': 'Missing required input'})
