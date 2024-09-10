@@ -101,6 +101,7 @@ h1, h2, h4 {
 .skin-img{
     display: block; 
     margin: 0 auto;
+    max-width: 100%;
 }
 .skin-p{
     text-align: justify; 
