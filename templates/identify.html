@@ -6,11 +6,19 @@
 
 <h1>Get Your Own Skincare Routine</h1>
 
-
+{% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="alert">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
 <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="file">Upload Image:</label>
-        <input type="file" class="form-control-file" id="file" name="file" required>
+        <input type="file" class="form-control-file" id="file" name="file" required accept="image/*>
         <h6><i>Upload a clear photo of your cleansed skin to receive a personalized skincare routine. To ensure accurate results, please ensure your skin is free from makeup or other products before taking the image.</i></h6>
     </div>
     <div id="imagePreview"></div>
