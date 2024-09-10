@@ -6,11 +6,15 @@ import os
 
 app = Flask(__name__, static_folder='static')
 
-# Load the trained model
-model = load_model('./MobileNetV2.h5')
+# Lazy loading model setup
+model = None  # Initially set the model to None
 
-# Ensure model is ready to make predictions
-model.make_predict_function()
+def get_model():
+    global model
+    if model is None:
+        model = load_model('./MobileNetV2.h5')
+        model.make_predict_function()  # Ensures the model is ready for prediction
+    return model
 
 recommendations = {
     'Dry': {
@@ -162,6 +166,8 @@ def predict():
 
         img = preprocess_image(file_path)
 
+        # Get the model using lazy loading
+        model = get_model()
         predictions = model.predict(img)
         class_index = np.argmax(predictions, axis=1)[0]
         classes = ['Dry', 'Oily', 'Normal', 'Combination', 'Sensitive']
@@ -191,7 +197,6 @@ def predict():
         return render_template('identify.html', prediction=predicted_class, routine=routine, tips=tips, image_file=file.filename)
 
     return jsonify({'error': 'Something went wrong'})
-
 
 if __name__ == "__main__":
     app.run(debug=True)
