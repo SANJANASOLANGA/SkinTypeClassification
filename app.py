@@ -204,7 +204,7 @@ def predict():
         return render_template('identify.html', prediction=predicted_class, routine=routine, tips=tips, image_file=file.filename)
 
     else:
-        flash('File type not allowed. Please upload a valid image file (png, jpg, jpeg)', 'danger')  # Flash error message
+        flash('File type not allowed. Please upload a valid image file', 'danger')  # Flash error message
         return redirect(url_for('identify'))
 
     # return jsonify({'error': 'Something went wrong'})
