@@ -1,10 +1,12 @@
-from flask import Flask, request, jsonify, render_template, redirect, url_for
+from flask import Flask, request, jsonify, render_template, redirect, url_for, flash
 from keras.models import load_model
 from keras.preprocessing import image
 import numpy as np
 import os
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__, static_folder='static')
+app.secret_key = 'supersecretkey'  # Needed for flashing messages
 
 # Lazy loading model setup
 model = None  # Initially set the model to None
@@ -115,7 +117,11 @@ def preprocess_image(img_path):
     img_array = np.expand_dims(img_array, axis=0)
     img_array = img_array / 255.0
     return img_array
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -146,7 +152,8 @@ def predict():
     allergies = request.form['allergies']
 
     if file.filename == '':
-        return jsonify({'error': 'No selected file'})
+        flash('No file selected', 'danger')  # Flash message for no file selected
+        return redirect(url_for('identify'))
 
     if age < 13:
         return render_template('identify.html', 
@@ -160,8 +167,8 @@ def predict():
                                routine="Consult a dermatologist",
                                tips="Focus on gentle, hydrating products suitable for mature skin.")
 
-    if file:
-        file_path = os.path.join('./', file.filename)
+    if file and allowed_file(file.filename):
+        file_path = os.path.join('./', secure_filename(file.filename))
         file.save(file_path)
 
         img = preprocess_image(file_path)
@@ -196,7 +203,11 @@ def predict():
 
         return render_template('identify.html', prediction=predicted_class, routine=routine, tips=tips, image_file=file.filename)
 
-    return jsonify({'error': 'Something went wrong'})
+    else:
+        flash('File type not allowed. Please upload a valid image file (png, jpg, jpeg)', 'danger')  # Flash error message
+        return redirect(url_for('identify'))
+
+    # return jsonify({'error': 'Something went wrong'})
 
 if __name__ == "__main__":
     app.run(debug=True)
